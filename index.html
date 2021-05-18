@@ -1,0 +1,27 @@
+from keras.datasets import mnist
+data=mnist.load_data()
+((x_train,y_train),(x_test,y_test))=data
+x_train=x_train.reshape((x_train.shape[0],28*28)).astype('float32')
+x_test=x_test.reshape((x_test.shape[0],28*28)).astype('float32')
+x_train=x_train/255 
+x_test=x_test/255 
+from keras.utils import np_utils
+
+print(y_test.shape)
+
+y_train=np_utils.to_categorical(y_train)
+y_test=np_utilis.to_categorical(y_test)
+
+num_classes=y_test.shape[1] 
+print(y_test.shape)
+from keras.models import Sequential
+from  keras.layers import Dense
+model=Sequential()
+model.add(Dense(32,  input-dim =28*28,activation='relu'))
+model.add(Dense(64,  activation='relu'))
+model.add(Dense(10,  activation='softmax'))
+model.compile(loss='categorical_crossentroy', optimizer='adam',metrics=['accuracy'])
+model.summary()
+model.fit(X_train, y_train,epochs=10, batch_size=100)
+score = model.evaluate(X_test, y_test)
+print(scores)
